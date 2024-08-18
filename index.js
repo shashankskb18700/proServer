@@ -5,7 +5,6 @@ const userMiddleware = require("./middleware/user");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const cors = require("cors");
-const keys = require("./keys/keys");
 
 const app = express();
 
@@ -14,12 +13,12 @@ app.use(cookieParser());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey],
+    keys: [process.env.NODE_APP_API_COOKIE_KEY],
   })
 );
 app.use(cors());
 
-connection(keys.databaseUrl);
+connection(process.env.NODE_APP_API_DATABASE_URL);
 UserRouter(app);
 
 app.listen(5000);
