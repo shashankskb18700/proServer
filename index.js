@@ -5,6 +5,7 @@ const userMiddleware = require("./middleware/user");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
@@ -21,4 +22,4 @@ app.use(cors());
 connection(process.env.NODE_APP_API_DATABASE_URL);
 UserRouter(app);
 
-app.listen(5000);
+app.listen(5000 || process.env.PORT);
